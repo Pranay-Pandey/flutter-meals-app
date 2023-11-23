@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meals.dart';
+import 'package:meals/screens/mealInfo.dart';
+
 class MealsWidget extends StatelessWidget {
   const MealsWidget(this.meal, {super.key});
 
@@ -9,7 +11,10 @@ class MealsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () => Navigator.of(context).pushNamed('/meal', arguments: meal),
+        onTap: () => {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => MealInfo(meal)))
+        },
         child: Column(
           children: [
             Stack(
