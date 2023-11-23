@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:meals/models/model.dart' as model;
 
 class CategoryView extends StatelessWidget {
@@ -11,24 +9,24 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
+            category.color.withOpacity(0.55),
             category.color.withOpacity(0.9),
-            category.color.withOpacity(0.5),
           ],
-          begin: Alignment.topCenter  ,
+          begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Center(child: Text(category.title, style: 
-      TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
-        fontFamily: GoogleFonts.abel().fontFamily,
-        // color: Colors.white,  
-      ),)),
+      child: Text(
+        category.title,
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.onBackground,
+            ),
+      ),
     );
   }
 }
