@@ -61,27 +61,29 @@ class MealInfo extends StatelessWidget {
             ),
             Container(
               height: 300,
-              width: 300,
+              width: double.maxFinite,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: ListView.builder (
-                scrollDirection: Axis.vertical,
-                itemCount: meal.steps.length,
-                itemBuilder: (ctx, index) {
-                  return Column(
-                    children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          child: Text('# ${index + 1}'),
+              child: Expanded(
+                child: ListView.builder (
+                  scrollDirection: Axis.vertical,
+                  itemCount: meal.steps.length,
+                  itemBuilder: (ctx, index) {
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: CircleAvatar(
+                            child: Text('# ${index + 1}'),
+                          ),
+                          title: Text(meal.steps[index]),
                         ),
-                        title: Text(meal.steps[index]),
-                      ),
-                      const Divider(),
-                    ],
-                  );
-                },
+                        const Divider(),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(

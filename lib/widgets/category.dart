@@ -5,9 +5,10 @@ import 'package:meals/models/meals.dart';
 import 'package:meals/screens/meals.dart';
 
 class CategoryView extends StatelessWidget {
-  const CategoryView({super.key, required this.category});
+  const CategoryView({super.key, required this.category, required this.caller});
 
   final model.Category category;
+  final void Function() caller;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,7 @@ class CategoryView extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(category.title),));
         }
       },
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> MealsScreen(title: category.title, meals: 
-          dummyMeals.where((element) => element.categories.contains(category.id)).toList())));
-      },
+      onTap: caller,
       borderRadius: BorderRadius.circular(16),
       splashColor: Theme.of(context).colorScheme.onBackground,
       child: Container(
@@ -51,18 +49,4 @@ class CategoryView extends StatelessWidget {
       ),
     );
   }
-}
-
-
-// Router for meals
-
-Route<dynamic> mealsRoute(RouteSettings settings) {
-  final args = settings.arguments as Map<String, dynamic>;
-  return MaterialPageRoute(
-    settings: settings,
-    builder: (context) => MealsScreen(
-      title: args['title'] as String,
-      meals: args['meals'] as List<Meal>,
-    ),
-  );
 }
