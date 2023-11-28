@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meals.dart';
+import 'package:meals/screens/meal_item.dart';
 import 'package:meals/widgets/meal_item_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -14,7 +15,7 @@ class MealItem extends StatelessWidget {
   }
 
   get formmatedaffordability {
-    return meal.affordability.name[0].toUpperCase()+
+    return meal.affordability.name[0].toUpperCase() +
         meal.affordability.name.substring(1);
   }
 
@@ -26,7 +27,12 @@ class MealItem extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => MealItemScreen(meal)),
+            );
+        },
         child: Stack(
           children: [
             FadeInImage(
