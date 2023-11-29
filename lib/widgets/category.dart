@@ -13,16 +13,9 @@ class CategoryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onDoubleTap: () {
-        showModalBottomSheet(context: context, builder: (buil){
-          return MealsScreen(title: category.title, meals: 
-          dummyMeals.where((element) => element.categories.contains(category.id)).toList());
-        });
-      },
       onHover: (val){
         if (val){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(category.title),));
-        }
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(category.title),));}
       },
       onTap: caller,
       borderRadius: BorderRadius.circular(16),
