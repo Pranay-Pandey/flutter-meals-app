@@ -59,7 +59,7 @@ The project follows a typical Flutter project structure. Key directories and fil
 - `screens/`: Screens for different parts of the application (e.g., home, meal details).
 - `widgets/`: Reusable widgets used throughout the app.
 - `data/`: Mock data or data fetching logic.
-- `assets/`: Images, fonts, or other static assets.
+- `model/`: Models used in the structuring.
 
 Feel free to explore and modify the structure based on your needs.
 
