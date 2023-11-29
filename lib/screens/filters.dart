@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:meals/screens/tabs.dart';
-import 'package:meals/widgets/drawer.dart';
+import 'package:meals/widgets/filter.dart';
+
+enum FilterValues{
+  gluttenFree, 
+  lactoseFree,
+  vegan, 
+  vegetarian
+}
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  FilterScreen({super.key, required this.initialFilters});
+
+  Map<FilterValues, bool> initialFilters;
 
   @override
   State<StatefulWidget> createState() {
@@ -13,6 +21,18 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   bool _glutenFreeFilter = false;
+  bool _lactoseFreeFilter = false;
+  bool _vegetarianFilter = false;
+  bool _veganFilter = false;
+
+  @override
+  void initState() {
+    _glutenFreeFilter = widget.initialFilters[FilterValues.gluttenFree]!;
+    _lactoseFreeFilter = widget.initialFilters[FilterValues.lactoseFree]!;
+    _vegetarianFilter = widget.initialFilters[FilterValues.vegetarian]!;
+    _veganFilter = widget.initialFilters[FilterValues.vegan]!;
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,37 +40,58 @@ class _FilterScreenState extends State<FilterScreen> {
         appBar: AppBar(
           title: const Text('Your Filters'),
         ),
-        drawer: MainDrawer(selectScreen_: (identifier){
-          Navigator.of(context).pop();
-          if (identifier=='meals'){
-            Navigator.of(context).push(MaterialPageRoute(builder: (builder){
-              return const TabsScreen();
-            }));
-          }
-        },),
-        body: Column(
-          children: [
-            SwitchListTile(
-              value: _glutenFreeFilter,
-              onChanged: (newvalue) {
-                setState(() {
-                  _glutenFreeFilter = newvalue;
-                });
-              },
-              title: Text(
-                'Glutten Free',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-              ),
-              subtitle: Text(
-                'Only include glutten free meals',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-              ),
-            )
-          ],
+        body: WillPopScope(
+          onWillPop: () async{
+            Navigator.of(context).pop(
+              {
+                FilterValues.gluttenFree: _glutenFreeFilter,
+                FilterValues.lactoseFree: _lactoseFreeFilter,
+                FilterValues.vegan: _veganFilter,
+                FilterValues.vegetarian: _vegetarianFilter
+              }
+            );
+            return false;
+          },
+          child: Column(
+            children: [
+              Filter(
+                  title: 'Glutten Free',
+                  subtitle: 'Only include glutten free meals',
+                  variable: _glutenFreeFilter, 
+                  changeFunction: (newValue){
+                    setState(() {
+                    _glutenFreeFilter = newValue;
+                    });
+                  },),
+              Filter(
+                  title: 'Lactose Free',
+                  subtitle: 'Only include lactose free meals',
+                  variable: _lactoseFreeFilter, 
+                  changeFunction: (newValue){
+                    setState(() {
+                    _lactoseFreeFilter = newValue;
+                    });
+                  },),
+              Filter(
+                  title: 'Vegetarian',
+                  subtitle: 'Only include vegetarian meals',
+                  variable: _vegetarianFilter, 
+                  changeFunction: (newValue){
+                    setState(() {
+                    _vegetarianFilter = newValue;
+                    });
+                  },),
+              Filter(
+                  title: 'Vegan',
+                  subtitle: 'Only include vegan meals',
+                  variable: _veganFilter, 
+                  changeFunction: (newValue){
+                    setState(() {
+                    _veganFilter = newValue;
+                    });
+                  },),
+            ],
+          ),
         ));
   }
 }
