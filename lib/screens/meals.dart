@@ -4,13 +4,13 @@ import 'package:meals/models/meals.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen(
+  MealsScreen(
       {super.key,
-      required this.title,
+      this.title,
       required this.meals,
       required this.toogleFavorite});
 
-  final String title;
+  String? title;
   final List<Meal> meals;
   final Function(Meal meal) toogleFavorite;
 
@@ -49,9 +49,13 @@ class MealsScreen extends StatelessWidget {
       );
     }
 
+    if (title==null){
+      return content;
+    }
+
     return Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(title!),
         ),
         body: content);
   }

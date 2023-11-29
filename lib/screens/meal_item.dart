@@ -13,29 +13,23 @@ class MealItemScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
+        actions: [
+          IconButton(
+            onPressed: () => toogleFavorite(meal),
+            icon: const Icon(
+              Icons.favorite,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          Stack(children: [
-            Image.network(
-              meal.imageUrl,
-              width: double.maxFinite,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
-            Positioned(
-              top: 5,
-              right: 5,
-              child: GestureDetector(
-                onTap: (){
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Favorited ${meal.title}')));
-                  toogleFavorite(meal);
-                },
-                child: const Icon(Icons.star, 
-                ),
-              ),
-            )
-          ]),
+          Image.network(
+            meal.imageUrl,
+            width: double.maxFinite,
+            height: 300,
+            fit: BoxFit.cover,
+          ),
           const SizedBox(height: 10),
           Text(
             'Ingredients',
