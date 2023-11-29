@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/meals.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  MealsScreen(
+  const MealsScreen(
       {super.key,
       this.title,
       required this.meals,
       required this.toogleFavorite});
 
-  String? title;
+  final String? title;
   final List<Meal> meals;
   final Function(Meal meal) toogleFavorite;
 

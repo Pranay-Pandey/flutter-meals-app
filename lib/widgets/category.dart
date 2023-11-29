@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/category.dart' as model;
-import 'package:meals/models/meals.dart';
-import 'package:meals/screens/meals.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key, required this.category, required this.caller});

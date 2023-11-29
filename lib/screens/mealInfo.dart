@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meals.dart';
-import 'package:meals/data/dummy_data.dart';
 
 class MealInfo extends StatelessWidget {
   const MealInfo(this.meal, {super.key});
